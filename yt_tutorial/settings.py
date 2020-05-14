@@ -122,4 +122,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# This is for a styling library called crispy. This forces it to use bootstrap4
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# This is to configure the default redirection when using the Django login forms
+LOGIN_REDIRECT_URL = 'blog-home'
+# The name of the URL pattern we gave to our login route. Django needs this for login required stuff
+LOGIN_URL = 'login'
