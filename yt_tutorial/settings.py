@@ -122,6 +122,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# This is config for where to store assets like profile pictures
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# This is the public access to the pics in the browser
+MEDIA_URL = '/media/'
+
 # This is for a styling library called crispy. This forces it to use bootstrap4
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
