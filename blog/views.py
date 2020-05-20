@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 from django.views.generic import (
     ListView,
     DetailView,
@@ -22,6 +23,20 @@ class PostListView(ListView):
     template_name = 'blog/home.html' # by default, the view will look in <app>/<model>_<viewtype>
     context_object_name = 'posts' # overwriting the name of the list. otherwise it would be object_list
     ordering = ['-date_posted'] # order the query the minus sign reverses the default ordering (default is oldest to newest)
+    paginate_by = 6 # this uses the django pagination library to give pagination functionality
+
+class UserPostListView(ListView):
+    model = Post
+    template_name = 'blog/user_posts.html' # by default, the view will look in <app>/<model>_<viewtype>
+    context_object_name = 'posts' # overwriting the name of the list. otherwise it would be object_list
+    paginate_by = 6 # this uses the django pagination library to give pagination functionality
+
+    # this is used to overwrite the default quest that the list view makes
+    def get_queryset(self):
+        # the kwargs are the url parameters from the request
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
+    
 
 class PostDetailView(DetailView):
     model = Post
