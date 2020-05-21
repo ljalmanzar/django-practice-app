@@ -10,9 +10,9 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
     # overwriting the save method to add functionality
-    def save(self):
+    def save(self, *args, **kawrgs):
         # running parent save
-        super().save()
+        super().save(*args, **kawrgs)
 
         # openning image & resizing
         img = Image.open(self.image.path)

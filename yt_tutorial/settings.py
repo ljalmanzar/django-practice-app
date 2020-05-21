@@ -134,3 +134,14 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'blog-home'
 # The name of the URL pattern we gave to our login route. Django needs this for login required stuff
 LOGIN_URL = 'login'
+
+
+# for password reseting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
+# credentials stored as environment variables
+EMAIL_HOST_USER = os.environ.get('DJANGO_BLOG_EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_BLOG_EMAIL_PW')
+
