@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,16 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('DJANGO_BLOG_EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_BLOG_EMAIL_PW')
 
+# S3 Storage settings
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
+# So files dont get overwritten if use uploads same name as existing
+AWS_S3_FILE_OVERWRITE = False
+# Recommended None by django-storage
+AWS_DEFAULT_ACL = None
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_S3_REGION_NAME = 'us-east-2'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
