@@ -38,6 +38,7 @@ def profile(request):
             p_form.save()
 
         messages.success(request, f'Account updated.')
+        # django redirect module. there is also a method to check if it is a 'safe url'. can import settings and use the allowed hosts
         return redirect('profile')
 
     else:
